@@ -25,7 +25,10 @@ namespace Exec2_OOP_Q2
 			int dice3 = 0;
 			int dice4 = 0;
 			int result = 0;
-			int maxResult = 0;
+			int minResult1 = 0;
+			
+
+
 			do
 			{
 				int seed = Guid.NewGuid().GetHashCode();
@@ -41,6 +44,7 @@ namespace Exec2_OOP_Q2
 				dice2 != dice3 && dice2 != dice4 &&
 				dice3 != dice4);
 			int[] dices = { dice1, dice2, dice3, dice4 };
+			
 			for (int i = 0; i < dices.Length; i++)
 			{
 				for (int j = 0; j < dices.Length; j++)
@@ -48,18 +52,27 @@ namespace Exec2_OOP_Q2
 					if (dices[i] == dices[j] && i != j)
 					{
 						result = dices[i] * 2;
-						if (result > maxResult)
+						if (result < minResult1)
 						{
-							maxResult = result;
+							minResult1 = result;
 						}
 					}
 				}
+			}
+			int answer = dice1 + dice2 + dice3 + dice4;
+			if (minResult1 == 0)
+			{ 
+				answer = answer - result;
+			}
+			else
+			{ 
+				answer = answer - minResult1;
 			}
 			label1.Text = $"{dice1}";
 			label2.Text = $"{dice2}";
 			label3.Text = $"{dice3}";
 			label4.Text = $"{dice4}";
-			label5.Text=$"{maxResult}";
+			label5.Text=$"{answer}";
 		}
 	}
 }
